@@ -10,7 +10,7 @@ LaTeX author support files for IMS supported journal:
 The following files are given in the repository (or directly in `.zip` archive):
 
 -   `imsart.cls`, `imsart.sty` - LaTeX style files designed for *IMS* supported journals articles. 
-    Please do not change them. These files are already loaded in the respective template files; 
+    Please do not change them. These files are already loaded in the template/sample files; 
 -   `bj-template.tex` - the main template file should be used for article preparation;
 -   `bj-sample.pdf` - instructions for the preparation of a
     camera-ready paper in LaTeX. This document contains useful information regarding the structure 
