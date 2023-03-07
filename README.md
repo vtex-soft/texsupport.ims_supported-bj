@@ -29,6 +29,11 @@ The following files are given in the repository (or directly in `.zip` archive):
 -   Read the instructions (`bj-sample.pdf`) for the preparation of your LaTeX document;
 -   Use the template file `bj-template.tex` to prepare your manuscript.
 
+## Tips
+
+-   To remove frame from the text box use document class option `noshowframe`, e.g:
+
+        `\documentclass[bj,authoryear,noshowframe]{imsart}`
 
 ## Bug reports
 
