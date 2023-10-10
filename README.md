@@ -33,7 +33,7 @@ The following files are given in the repository (or directly in `.zip` archive):
 
 -   To remove frame from the text box use document class option `noshowframe`, e.g:
 
-        `\documentclass[bj,authoryear,noshowframe]{imsart}`
+        \documentclass[bj,authoryear,noshowframe]{imsart}
 
 ## Bug reports
 
