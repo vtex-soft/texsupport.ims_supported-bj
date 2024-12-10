@@ -65,7 +65,7 @@
 % Requires Latex2e, ver.2000.06
 %
 \def\imsfmt@name{imsart}
-\def\imsfmt@version{2024/09/06}
+\def\imsfmt@version{2024/12/10}
 %
 \ProvidesFile{imsart.sty}[\imsfmt@version\space IMS article style]
 %
@@ -310,7 +310,7 @@
 \DeclareOption{bj}{%
     \def\journal@id{-bj}%
     \def\journal@name{Submitted to Bernoulli }%
-    \def\journal@url{http://www.bernoulli-society.org/index.php/publications/bernoulli-journal/bernoulli-journal}%
+    \def\journal@url{https://www.bernoullisociety.org/index.php/publications/bernoulli-journal/bernoulli-journal}%
     \def\journal@issn{1350-7265}%
     \set@page@layout{34pc}{574pt}%
     \@twosidetrue
@@ -2560,6 +2560,7 @@
 \if@ejs@ps@ss@layout
     \RequirePackage{lmodern}
     \usepackage[T1]{fontenc}
+    \UseLegacyTextSymbols% for text bullets, etc.
     \AtEndOfPackage{%
         \ifcsundef{do@not@scale@lmex}%
             {% make lmex10 scalable
@@ -2576,6 +2577,7 @@
 \if@balayout
     \RequirePackage{lmodern}
     \usepackage[T1]{fontenc}
+    \UseLegacyTextSymbols% for text bullets, etc.
     % make lmex10 scalable
     \DeclareFontFamily{OMX}{lmex}{}
     \DeclareFontShape{OMX}{lmex}{m}{n}{%
@@ -3374,7 +3376,7 @@
     \ifdefined\HCode
     \else
         \ifdefined\new@tx@math@sty@exists
-            \RequirePackage[cmintegrals,bigdelims]{newtxmath}
+            \RequirePackage{newtxmath}
         \else
             \PackageWarning{imsart}{newtxmath package isn't available, 
                 amsmath is used instead}%
@@ -4452,7 +4454,7 @@
             {.}%
             {0.5em}%
             {\thmname{##1}\thmnumber{ ##2}\thmnote{ (##3)}}%
-        \newtheoremstyle{definition}%
+        \newtheoremstyle{remark}%
             {\medskipamount}%
             {\medskipamount}%
             {\itshape}%
@@ -4461,7 +4463,7 @@
             {.}%
             {0.5em}%
             {}%
-        \newtheoremstyle{remark}%
+        \newtheoremstyle{definition}%
             {\medskipamount}%
             {\medskipamount}%
             {\normalfont}%
