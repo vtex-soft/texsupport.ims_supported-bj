@@ -3,7 +3,7 @@
 ## About
 
 LaTeX author support files for IMS supported journal: 
-[Bernoulli (BJ)](http://www.bernoulli-society.org/index.php/publications/bernoulli-journal/bernoulli-journal)
+[Bernoulli (BJ)](https://www.bernoullisociety.org/index.php/publications/bernoulli-journal/bernoulli-journal)
 
 ## Contents
 
