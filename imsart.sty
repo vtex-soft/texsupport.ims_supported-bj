@@ -65,7 +65,7 @@
 % Requires Latex2e, ver.2000.06
 %
 \def\imsfmt@name{imsart}
-\def\imsfmt@version{2024/12/10}
+\def\imsfmt@version{2024/12/16}
 %
 \ProvidesFile{imsart.sty}[\imsfmt@version\space IMS article style]
 %
@@ -519,6 +519,13 @@
 % Execute options
 \ExecuteOptions{}
 \ProcessOptions
+%
+\if@bjlayout
+    \if@imsart@nameyear
+    \else
+        \PassOptionsToPackage{sort&compress}{natbib}%
+    \fi
+\fi
 %
 % dimensions
 %
@@ -1684,7 +1691,13 @@
         \setaftersec@dot{#5}%
         \def\@svsechd{#4{\hskip #1\relax #5\aftersec@dot}}%
     \fi
-    \ifnum\ssection@level=1\phantomsection\addcontentsline{toc}{section}{#5}\fi
+    \ifnum\ssection@level=1%
+      \ifdefined\HCode
+      \else
+        \phantomsection
+      \fi
+      \addcontentsline{toc}{section}{#5}%
+    \fi
     \@xsect{#3}%
     }
 %
@@ -3558,24 +3571,19 @@
         }
     %
     \AtBeginDocument{%
-        \ifcsundef{jobstart@date@info}%
-            {\xdef\jobstart@date@info{\the\year\two@digits{\the\month}\two@digits{\the\day}}}%
-            {}%
-        \ifnum\jobstart@date@info>20211202\relax
-            \def\author@sep@by@number#1{%
-                \@tempcntb=\author@num
-                \advance\@tempcntb by \m@ne
-                \ifnum#1=\@tempcntb
-                    \unskip\unkern\ \and
+        \def\author@sep@by@number#1{%
+            \@tempcntb=\author@num
+            \advance\@tempcntb by \m@ne
+            \ifnum#1=\@tempcntb
+                \unskip\unkern\ \and
+            \else
+                \ifnum#1=\author@num
                 \else
-                    \ifnum#1=\author@num
-                    \else
-                        \unskip\unkern,
-                    \fi
+                    \unskip\unkern,
                 \fi
-                \ignorespaces
-                }%
-        \fi
+            \fi
+            \ignorespaces
+            }%
         }
     % invoke \printhistory at end of document:
     \let\old@enddocument\enddocument
@@ -4457,7 +4465,7 @@
         \newtheoremstyle{remark}%
             {\medskipamount}%
             {\medskipamount}%
-            {\itshape}%
+            {\normalfont}%
             {\z@}%
             {\bfseries}%
             {.}%
@@ -5049,6 +5057,7 @@
 %
 % appendix
 %
+\def\@appsectionstar@hook{}
 \if@imslayout
     %
     % appendix mess up everything in this layout:
@@ -5073,6 +5082,7 @@
             \specialsection*{\appendixname: #1}%
         \fi
         \setcounter{section}{1}%
+        \@appsectionstar@hook
         }
     %
     % \section{} -> APPENDIX A
@@ -5105,6 +5115,7 @@
     \def\@appsectionstar*#1{%
         \old@section*{#1}%
         \setcounter{section}{1}%
+        \@appsectionstar@hook
         }
     %
     \def\@appsectionnostar#1{%
@@ -5114,6 +5125,11 @@
             \def\section@numbersep{:}\old@section{#1}%
         \fi
         }
+\fi
+\if@bjlayout
+    \if@imsart@seceqn
+        \def\@appsectionstar@hook{\setcounter{equation}{0}}
+    \fi
 \fi
 %
 % supplement
