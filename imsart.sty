@@ -4550,17 +4550,6 @@
             {.}%
             {0.5em}%
             {\thmname{##1}\thmnumber{ ##2}\thmnote{ (##3)}}%
-        \ifnum\jobstart@date@info<20250219\relax
-            \newtheoremstyle{remark}%
-                {\medskipamount}%
-                {\medskipamount}%
-                {\normalfont}%
-                {\z@}%
-                {\bfseries}%
-                {.}%
-                {0.5em}%
-                {}%
-        \fi
         \newtheoremstyle{definition}%
             {\medskipamount}%
             {\medskipamount}%
@@ -4611,24 +4600,22 @@
         \fi
     \fi
     \ifnum\ims@thmshape>\z@
-        \ifnum\jobstart@date@info>20250218\relax
-            \def\th@remark@changeto{%
-                \PackageError{amsthm}{change \string\theoremstyle{remark} to \string\theoremstyle{definition}}{}%
+        \def\th@remark@changeto{%
+            \PackageError{amsthm}{change \string\theoremstyle{remark} to \string\theoremstyle{definition}}{}%
+            }%
+        \let\th@remark\undefined
+        \renewcommand{\theoremstyle}[1]{%
+            \@ifundefined{th@##1}%
+                {%
+                    \thm@style{plain}%
+                    \@ifundefined{th@##1@changeto}%
+                        {\PackageError{amsthm}{Unknown theoremstyle `##1'}{}}%
+                        {\csname th@##1@changeto\endcsname}%
                 }%
-            \let\th@remark\undefined
-            \renewcommand{\theoremstyle}[1]{%
-                \@ifundefined{th@##1}%
-                    {%
-                        \thm@style{plain}%
-                        \@ifundefined{th@##1@changeto}%
-                            {\PackageError{amsthm}{Unknown theoremstyle `##1'}{}}%
-                            {\csname th@##1@changeto\endcsname}%
-                    }%
-                    {%
-                        \thm@style{##1}%
-                    }%
+                {%
+                    \thm@style{##1}%
                 }%
-        \fi
+            }%
     \fi
     }
 %
